@@ -45,7 +45,7 @@ type HelmReleaseInterface interface {
 	DeleteCollection(ctx context.Context, options *metav1.DeleteOptions, listOptions metav1.ListOptions) error
 	Get(ctx context.Context, name string, options metav1.GetOptions) (*v1.HelmRelease, error)
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.HelmReleaseList, error)
-	Watch(opts metav1.ListOptions) (watch.Interface, error)
+	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.HelmRelease, err error)
 	HelmReleaseExpansion
 }
@@ -95,7 +95,7 @@ func (c *helmReleases) List(ctx context.Context, opts metav1.ListOptions) (resul
 }
 
 // Watch returns a watch.Interface that watches the requested helmReleases.
-func (c *helmReleases) Watch(opts metav1.ListOptions) (watch.Interface, error) {
+func (c *helmReleases) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -106,7 +106,7 @@ func (c *helmReleases) Watch(opts metav1.ListOptions) (watch.Interface, error) {
 		Resource("helmreleases").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Watch()
+		Watch(ctx)
 }
 
 // Create takes the representation of a helmRelease and creates it.  Returns the server's representation of the helmRelease, and an error, if there is any.
