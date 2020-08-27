@@ -8,7 +8,7 @@ require (
 	github.com/docker/libtrust v0.0.0-20160708172513-aabc10ec26b7 // indirect
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/fluxcd/flux v1.17.2-0.20200121140732-3903cf8e71c3
-	github.com/fluxcd/helm-operator/pkg/install
+	github.com/fluxcd/helm-operator/pkg/install v1.2.0
 	github.com/go-kit/kit v0.9.0
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/golang/protobuf v1.3.2
